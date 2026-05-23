@@ -1,9 +1,10 @@
 ﻿namespace BancoQuestoes.Models
 {
-    public class Aluno
+    public class TipoArquivo
     {
         public int Id { get; set; }
 
         public string Nome { get; set; }
+
     }
 }
