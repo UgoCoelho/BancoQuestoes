@@ -20,15 +20,15 @@ public class MateriaController : Controller
     }
 
     // GET: MATERIAS/Details/5
-    public async Task<IActionResult> Details(int? id)
+    public async Task<IActionResult> Details(int? materiaid)
     {
-        if (id == null)
+        if (materiaid == null)
         {
             return NotFound();
         }
 
         var materia = await _context.Materias
-            .FirstOrDefaultAsync(m => m.Id == id);
+            .FirstOrDefaultAsync(m => m.MateriaId == materiaid);
         if (materia == null)
         {
             return NotFound();
@@ -48,7 +48,7 @@ public class MateriaController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,periodo,Nome")] Materia materia)
+    public async Task<IActionResult> Create([Bind("MateriaId,Periodo,Nome")] Materia materia)
     {
         if (ModelState.IsValid)
         {
@@ -60,14 +60,14 @@ public class MateriaController : Controller
     }
 
     // GET: MATERIAS/Edit/5
-    public async Task<IActionResult> Edit(int? id)
+    public async Task<IActionResult> Edit(int? materiaid)
     {
-        if (id == null)
+        if (materiaid == null)
         {
             return NotFound();
         }
 
-        var materia = await _context.Materias.FindAsync(id);
+        var materia = await _context.Materias.FindAsync(materiaid);
         if (materia == null)
         {
             return NotFound();
@@ -80,9 +80,9 @@ public class MateriaController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int? id, [Bind("Id,periodo,Nome")] Materia materia)
+    public async Task<IActionResult> Edit(int? materiaid, [Bind("MateriaId,Periodo,Nome")] Materia materia)
     {
-        if (id != materia.Id)
+        if (materiaid != materia.MateriaId)
         {
             return NotFound();
         }
@@ -96,7 +96,7 @@ public class MateriaController : Controller
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MateriaExists(materia.Id))
+                if (!MateriaExists(materia.MateriaId))
                 {
                     return NotFound();
                 }
@@ -111,15 +111,15 @@ public class MateriaController : Controller
     }
 
     // GET: MATERIAS/Delete/5
-    public async Task<IActionResult> Delete(int? id)
+    public async Task<IActionResult> Delete(int? materiaid)
     {
-        if (id == null)
+        if (materiaid == null)
         {
             return NotFound();
         }
 
         var materia = await _context.Materias
-            .FirstOrDefaultAsync(m => m.Id == id);
+            .FirstOrDefaultAsync(m => m.MateriaId == materiaid);
         if (materia == null)
         {
             return NotFound();
@@ -131,9 +131,9 @@ public class MateriaController : Controller
     // POST: MATERIAS/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(int? id)
+    public async Task<IActionResult> DeleteConfirmed(int? materiaid)
     {
-        var materia = await _context.Materias.FindAsync(id);
+        var materia = await _context.Materias.FindAsync(materiaid);
         if (materia != null)
         {
             _context.Materias.Remove(materia);
@@ -143,8 +143,8 @@ public class MateriaController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-    private bool MateriaExists(int? id)
+    private bool MateriaExists(int? materiaid)
     {
-        return _context.Materias.Any(e => e.Id == id);
+        return _context.Materias.Any(e => e.MateriaId == materiaid);
     }
 }
