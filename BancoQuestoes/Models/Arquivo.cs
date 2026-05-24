@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace BancoQuestoes.Models
+﻿namespace BancoQuestoes.Models
 {
     public class Arquivo
     {
@@ -22,11 +20,6 @@ namespace BancoQuestoes.Models
 
         public int TipoArquivoId { get; set; }
         public TipoArquivo? TipoArquivo { get; set; }
-
-        public string? ArquivoNome { get; set; }
-
-        [NotMapped]
-        public IFormFile? ArquivoUpload { get; set; }
 
     }
 }

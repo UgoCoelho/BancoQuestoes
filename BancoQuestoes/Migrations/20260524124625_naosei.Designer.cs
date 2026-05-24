@@ -3,6 +3,7 @@ using BancoQuestoes.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BancoQuestoes.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260524124625_naosei")]
+    partial class naosei
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,27 +101,6 @@ namespace BancoQuestoes.Migrations
                     b.ToTable("Materias");
                 });
 
-            modelBuilder.Entity("BancoQuestoes.Models.Periodo", b =>
-                {
-                    b.Property<int>("PeriodoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PeriodoId"));
-
-                    b.Property<int>("CursoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Numero")
-                        .HasColumnType("int");
-
-                    b.HasKey("PeriodoId");
-
-                    b.HasIndex("CursoId");
-
-                    b.ToTable("Periodo");
-                });
-
             modelBuilder.Entity("BancoQuestoes.Models.TipoArquivo", b =>
                 {
                     b.Property<int>("TipoArquivoId")
@@ -186,17 +168,6 @@ namespace BancoQuestoes.Migrations
                     b.Navigation("Materia");
 
                     b.Navigation("TipoArquivo");
-                });
-
-            modelBuilder.Entity("BancoQuestoes.Models.Periodo", b =>
-                {
-                    b.HasOne("BancoQuestoes.Models.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Curso");
                 });
 
             modelBuilder.Entity("BancoQuestoes.Models.Usuario", b =>
