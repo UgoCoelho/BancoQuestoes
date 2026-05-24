@@ -3,6 +3,7 @@ using BancoQuestoes.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BancoQuestoes.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260524141506_periodo")]
+    partial class periodo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,9 +31,6 @@ namespace BancoQuestoes.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ArquivoNome")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CursoId")
                         .HasColumnType("int");
@@ -89,9 +89,6 @@ namespace BancoQuestoes.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MateriaId"));
 
-                    b.Property<int>("CursoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -100,8 +97,6 @@ namespace BancoQuestoes.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("MateriaId");
-
-                    b.HasIndex("CursoId");
 
                     b.ToTable("Materias");
                 });
@@ -180,7 +175,7 @@ namespace BancoQuestoes.Migrations
                     b.HasOne("BancoQuestoes.Models.Materia", "Materia")
                         .WithMany()
                         .HasForeignKey("MateriaId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BancoQuestoes.Models.TipoArquivo", "TipoArquivo")
@@ -196,7 +191,7 @@ namespace BancoQuestoes.Migrations
                     b.Navigation("TipoArquivo");
                 });
 
-            modelBuilder.Entity("BancoQuestoes.Models.Materia", b =>
+            modelBuilder.Entity("BancoQuestoes.Models.Periodo", b =>
                 {
                     b.HasOne("BancoQuestoes.Models.Curso", "Curso")
                         .WithMany()

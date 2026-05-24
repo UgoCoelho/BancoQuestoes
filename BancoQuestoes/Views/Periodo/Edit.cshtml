@@ -1,0 +1,30 @@
+@model BancoQuestoes.Models.Periodo
+
+<h1>Editar Período</h1>
+
+<form asp-action="Edit">
+
+    <input type="hidden" asp-for="PeriodoId" />
+
+    <div class="form-group">
+        <label asp-for="Numero"></label>
+        <input asp-for="Numero" class="form-control" />
+        <span asp-validation-for="Numero"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CursoId">Curso</label>
+
+        <select asp-for="CursoId"
+                asp-items="ViewBag.Cursos"
+                class="form-control">
+            <option value="">-- Selecione um curso --</option>
+        </select>
+
+        <span asp-validation-for="CursoId"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">Salvar</button>
+</form>
+
+<a asp-action="Index">Voltar</a>
