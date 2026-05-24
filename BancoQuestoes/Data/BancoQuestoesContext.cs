@@ -10,11 +10,10 @@ namespace BancoQuestoes.Data
         {
         }
 
-
         public DbSet<Materia> Materias { get; set; }
-        public DbSet<BancoQuestoes.Models.Usuario> Usuario { get; set; } = default!;
-        public DbSet<BancoQuestoes.Models.TipoArquivo> TipoArquivo { get; set; } = default!;
-        public DbSet<BancoQuestoes.Models.Curso> Curso { get; set; } = default!;
-        public DbSet<BancoQuestoes.Models.Arquivo> Arquivo { get; set; } = default!;
+        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<TipoArquivo> TipoArquivo { get; set; }
+        public DbSet<Curso> Curso { get; set; }
+        public DbSet<Arquivo> Arquivo { get; set; }
     }
 }
