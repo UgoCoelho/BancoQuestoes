@@ -7,6 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Periodo\**" />
+    <Content Remove="Views\Periodo\**" />
+    <EmbeddedResource Remove="Views\Periodo\**" />
+    <None Remove="Views\Periodo\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\PeriodoController.cs" />
+    <Compile Remove="Models\Periodo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.27">
