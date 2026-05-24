@@ -645,6 +645,364 @@ body {
 }
 
 /* =========================
+   PAGE UPLOAD
+========================= */
+
+.upload-page {
+    padding-bottom: 40px;
+}
+
+/* HEADER */
+
+.upload-header {
+    margin-bottom: 30px;
+}
+
+    .upload-header h1 {
+        font-size: 34px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 8px;
+    }
+
+    .upload-header p {
+        color: #64748b;
+        font-size: 15px;
+        margin: 0;
+    }
+
+/* LAYOUT */
+
+.upload-content {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+/* CARD PRINCIPAL */
+
+.upload-card {
+    flex: 1;
+    background: white;
+    border-radius: 22px;
+    padding: 24px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+/* UPLOAD BOX */
+
+.upload-box {
+    border: 2px dashed #cbd5e1;
+    border-radius: 18px;
+    background: #f8fafc;
+    padding: 45px 20px;
+    text-align: center;
+    margin-bottom: 22px;
+    transition: 0.25s;
+}
+
+    .upload-box:hover {
+        border-color: #2563eb;
+        background: #eff6ff;
+    }
+
+.upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+    .upload-label i {
+        font-size: 52px;
+        color: #2563eb;
+        margin-bottom: 16px;
+    }
+
+.upload-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 8px;
+}
+
+.upload-subtitle {
+    font-size: 14px;
+    color: #64748b;
+}
+
+.file-input {
+    display: none;
+}
+
+/* INPUTS */
+
+.upload-card .form-group {
+    margin-bottom: 16px;
+}
+
+.form-row {
+    display: flex;
+    gap: 16px;
+}
+
+    .form-row .form-group {
+        flex: 1;
+    }
+
+.custom-input {
+    width: 100%;
+    height: 52px;
+    border-radius: 12px;
+    border: 1px solid #dbe4f0;
+    padding: 0 15px;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+    .custom-input:focus {
+        border-color: #2563eb;
+        outline: none;
+        box-shadow: 0 0 0 4px rgba(37,99,235,0.10);
+    }
+
+.textarea {
+    height: 110px !important;
+    resize: none;
+    padding-top: 14px;
+}
+
+/* BOTÕES */
+
+.button-group {
+    display: flex;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.btn-cancel {
+    flex: 1;
+    height: 52px;
+    border-radius: 12px;
+    border: 1px solid #dbe4f0;
+    background: white;
+    color: #0f172a;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+    .btn-cancel:hover {
+        background: #f8fafc;
+    }
+
+.btn-submit {
+    width: 180px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg,#2563eb,#0ea5e9);
+    color: white;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        opacity: 0.95;
+    }
+
+/* SIDE */
+
+.side-content {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tips-card,
+.approval-card {
+    background: white;
+    border-radius: 22px;
+    padding: 22px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.tips-card {
+    background: linear-gradient(135deg,#2563eb,#0ea5e9);
+    color: white;
+    border: none;
+}
+
+    .tips-card h3,
+    .approval-card h3 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 18px;
+    }
+
+    .tips-card ul {
+        padding-left: 18px;
+        margin: 0;
+    }
+
+    .tips-card li {
+        margin-bottom: 10px;
+        font-size: 14px;
+    }
+
+.approval-card p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 14px;
+    color: #0f172a;
+}
+
+    .step span {
+        width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        background: #dbeafe;
+        color: #2563eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+    }
+
+/* RESPONSIVO */
+
+@media (max-width: 1100px) {
+
+    .upload-content {
+        flex-direction: column;
+    }
+
+    .side-content {
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .btn-submit {
+        width: 100%;
+        height: 52px;
+    }
+}
+
+/* =========================
+   DELETE PAGE
+========================= */
+
+.delete-card {
+    max-width: 600px;
+    margin: auto;
+}
+
+.delete-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.delete-icon {
+    margin: auto;
+    background: linear-gradient(135deg,#ef4444,#dc2626);
+}
+
+.delete-title {
+    margin-top: 20px;
+    color: #0f172a;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.delete-subtitle {
+    color: #64748b;
+    margin-top: 10px;
+}
+
+.delete-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+    .delete-box strong {
+        color: #0f172a;
+    }
+
+.btn-delete {
+    background: linear-gradient(135deg,#ef4444,#dc2626);
+}
+
+/* =========================
+   DETAILS PAGE
+========================= */
+
+.details-divider {
+    margin: 18px 0;
+    border: none;
+    border-top: 1px solid #e2e8f0;
+}
+
+.details-description {
+    color: #64748b;
+    line-height: 1.7;
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.details-badge-container {
+    margin-top: 25px;
+}
+
+.details-edit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.selected-file {
+    margin-top: 16px;
+    padding: 10px 16px;
+    background: #dbeafe;
+    color: #2563eb;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* =========================
    CRUD PADRÃO
 ========================= */
 
