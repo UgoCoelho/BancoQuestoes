@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BancoQuestoes.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260524203747_oitavioinitial")]
-    partial class oitavioinitial
+    [Migration("20260524211946_start")]
+    partial class start
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
