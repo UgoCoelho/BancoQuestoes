@@ -5,7 +5,7 @@
 namespace BancoQuestoes.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class oitavioinitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,6 +65,9 @@ namespace BancoQuestoes.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Matricula = table.Column<int>(type: "int", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Periodo = table.Column<int>(type: "int", nullable: false),
+                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Role = table.Column<int>(type: "int", nullable: false),
                     CursoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

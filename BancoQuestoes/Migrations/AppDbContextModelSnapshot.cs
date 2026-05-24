@@ -185,6 +185,17 @@ namespace BancoQuestoes.Migrations
                     b.Navigation("TipoArquivo");
                 });
 
+            modelBuilder.Entity("BancoQuestoes.Models.Materia", b =>
+                {
+                    b.HasOne("BancoQuestoes.Models.Curso", "Curso")
+                        .WithMany()
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Curso");
+                });
+
             modelBuilder.Entity("BancoQuestoes.Models.Usuario", b =>
                 {
                     b.HasOne("BancoQuestoes.Models.Curso", "Curso")
