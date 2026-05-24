@@ -15,5 +15,14 @@ namespace BancoQuestoes.Data
         public DbSet<TipoArquivo> TipoArquivo { get; set; }
         public DbSet<Curso> Curso { get; set; }
         public DbSet<Arquivo> Arquivo { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Arquivo>()
+                .HasOne(a => a.Materia)
+                .WithMany()
+                .HasForeignKey(a => a.MateriaId)
+                .OnDelete(DeleteBehavior.NoAction);
+        }
     }
 }

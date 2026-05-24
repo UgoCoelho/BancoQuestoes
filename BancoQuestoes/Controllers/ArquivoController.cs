@@ -35,29 +35,41 @@ public class ArquivoController : Controller
     // CREATE POST
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(Arquivo arquivo)
+    public async Task<IActionResult> Create([Bind("Id,Titulo,Professor,Tag,Descricao,CursoId,MateriaId,TipoArquivoId,ArquivoNome,ArquivoUpload")] Arquivo arquivo)
     {
-        // 🔥 SEM ISSO você perde debug de erro
-        if (!ModelState.IsValid)
+        if (arquivo.ArquivoUpload != null && arquivo.ArquivoUpload.Length > 0)
         {
-            CarregarCombos(arquivo);
-            return View(arquivo);
+            string pasta = Path.Combine(Directory.GetCurrentDirectory(), "Storage", "Arquivos");
+
+            if (!Directory.Exists(pasta))
+                Directory.CreateDirectory(pasta);
+
+            string nomeArquivo = Guid.NewGuid().ToString() + Path.GetExtension(arquivo.ArquivoUpload.FileName);
+            string caminhoCompleto = Path.Combine(pasta, nomeArquivo);
+
+            using (FileStream fs = new FileStream(caminhoCompleto, FileMode.Create))
+            {
+                await arquivo.ArquivoUpload.CopyToAsync(fs);
+            }
+
+            arquivo.ArquivoNome = nomeArquivo;
         }
 
-        try
+        ModelState.Remove("Curso");
+        ModelState.Remove("Materia");
+        ModelState.Remove("TipoArquivo");
+
+        if (ModelState.IsValid)
         {
-            _context.Arquivo.Add(arquivo);
+            _context.Add(arquivo);
             await _context.SaveChangesAsync();
-        }
-        catch (Exception ex)
-        {
-            ModelState.AddModelError("", "Erro ao salvar: " + ex.Message);
-            CarregarCombos(arquivo);
-            return View(arquivo);
+            return RedirectToAction(nameof(Index));
         }
 
-        return RedirectToAction(nameof(Index));
+        CarregarCombos(arquivo); 
+        return View(arquivo);
     }
+
 
     // EDIT GET
     public async Task<IActionResult> Edit(int? id)

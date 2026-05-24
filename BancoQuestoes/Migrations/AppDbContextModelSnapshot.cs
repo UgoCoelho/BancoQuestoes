@@ -29,6 +29,9 @@ namespace BancoQuestoes.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ArquivoNome")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CursoId")
                         .HasColumnType("int");
 
@@ -86,6 +89,9 @@ namespace BancoQuestoes.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MateriaId"));
 
+                    b.Property<int>("CursoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -94,6 +100,8 @@ namespace BancoQuestoes.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("MateriaId");
+
+                    b.HasIndex("CursoId");
 
                     b.ToTable("Materias");
                 });
@@ -151,7 +159,7 @@ namespace BancoQuestoes.Migrations
                     b.HasOne("BancoQuestoes.Models.Materia", "Materia")
                         .WithMany()
                         .HasForeignKey("MateriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("BancoQuestoes.Models.TipoArquivo", "TipoArquivo")
@@ -165,6 +173,17 @@ namespace BancoQuestoes.Migrations
                     b.Navigation("Materia");
 
                     b.Navigation("TipoArquivo");
+                });
+
+            modelBuilder.Entity("BancoQuestoes.Models.Materia", b =>
+                {
+                    b.HasOne("BancoQuestoes.Models.Curso", "Curso")
+                        .WithMany()
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Curso");
                 });
 
             modelBuilder.Entity("BancoQuestoes.Models.Usuario", b =>

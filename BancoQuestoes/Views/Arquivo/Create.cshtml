@@ -2,7 +2,7 @@
 
 <h1>Criar Arquivo</h1>
 
-<form asp-action="Create" method="post">
+<form asp-action="Create" method="post" enctype="multipart/form-data">
 
     <div>
         <label>Título</label>
@@ -37,6 +37,11 @@
     <div>
         <label>Tipo Arquivo</label>
         <select asp-for="TipoArquivoId" asp-items="ViewBag.TipoArquivoId" class="form-control"></select>
+    </div>
+
+    <div class="mb-3">
+        <label>Arquivo</label>
+        <input asp-for="ArquivoUpload" type="file" class="form-control" />
     </div>
 
     <button type="submit">Salvar</button>
