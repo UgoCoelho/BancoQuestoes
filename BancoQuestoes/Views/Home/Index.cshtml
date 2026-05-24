@@ -1,8 +1,89 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "TESTENOME";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="home-container">
+    <section>
+       <h1 class="hero-title">
+            Explore Cursos
+        </h1>
+        <p class="hero-subtitle">
+            Encontre exercícios, listas e resumos compartilhados pela comunidade
+        </p>
+    </section>
+
+    <!-- stats -->
+
+    <section class="stats-grid">
+        <div class="stats-card">
+            <div class="icon-box gradient-blue">
+                <i class="bi bi-file-earmark-text"></i>
+            </div>
+            <h2>247</h2>
+            <p>Total de Materiais</p>
+        </div>
+        <div class="stats-card">
+            <div class="icon-box gradient-neon">
+                <i class="bi bi-graph-up-arrow"></i>
+            </div>
+            <h2>+15</h2>
+            <p>Novos essa semana</p>
+        </div>
+        <div class="stats-card">
+            <div class="icon-box gradient-blue">
+                <i class="bi bi-people"></i>
+            </div>
+            <h2>1.234</h2>
+            <p>Colaboradores</p>
+        </div>
+    </section>
+
+    <!-- FILTROS -->
+
+    <section class="filters">
+        <select>
+            <option>Todos os cursos</option>  
+            <!--
+                @* @foreach (var curso in Model)
+                {
+                    <option value="@curso.Id">
+                        @curso.Nome
+                    </option>
+                } *@ -->
+            <option>aqui vai puxar os cursos disponíveis da Model Curso</option>
+        </select>
+        <input type="text"
+               placeholder="Buscar disciplna ou professor" />
+    </section>
+
+    <!-- CURSOS -->
+
+    <section class="courses-grid">
+        <!-- SI -->
+        <div class="course-card">
+            <span class="badge">
+                CURSO
+            </span>
+            <h2>Sistemas de Informação</h2>
+            <p>
+                Materiais, listas e resumos do curso
+            </p>
+            <a href="#" class="course-button">
+                Explorar materiais
+            </a>
+        </div>
+        <!-- ES -->
+        <div class="course-card">
+            <span class="badge">
+                CURSO
+            </span>
+            <h2>Engenharia de Software</h2>
+            <p>
+                Materiais, listas e resumos do curso
+            </p>
+            <a href="#" class="course-button">
+                Explorar materiais
+            </a>
+        </div>
+    </section>
 </div>
