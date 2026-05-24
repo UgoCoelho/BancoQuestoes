@@ -23,69 +23,68 @@ namespace BancoQuestoes.Migrations
 
             modelBuilder.Entity("BancoQuestoes.Models.Curso", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("CursoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CursoId"));
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("CursoId");
 
                     b.ToTable("Curso");
                 });
 
             modelBuilder.Entity("BancoQuestoes.Models.Materia", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("MateriaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MateriaId"));
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("periodo")
+                    b.Property<int>("Periodo")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("MateriaId");
 
                     b.ToTable("Materias");
                 });
 
             modelBuilder.Entity("BancoQuestoes.Models.TipoArquivo", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("TipoArquivoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TipoArquivoId"));
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("TipoArquivoId");
 
                     b.ToTable("TipoArquivo");
                 });
 
             modelBuilder.Entity("BancoQuestoes.Models.Usuario", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("UsuarioId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UsuarioId"));
 
-                    b.Property<string>("Curso")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CursoId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Matricula")
                         .HasColumnType("int");
@@ -94,9 +93,22 @@ namespace BancoQuestoes.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("UsuarioId");
+
+                    b.HasIndex("CursoId");
 
                     b.ToTable("Usuario");
+                });
+
+            modelBuilder.Entity("BancoQuestoes.Models.Usuario", b =>
+                {
+                    b.HasOne("BancoQuestoes.Models.Curso", "Curso")
+                        .WithMany()
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Curso");
                 });
 #pragma warning restore 612, 618
         }

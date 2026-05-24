@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BancoQuestoes.Data;
 using BancoQuestoes.Models;
+using BancoQuestoes.Data;
 
 namespace BancoQuestoes.Controllers
 {
-    public class TipoArquivoeController : Controller
+    public class CursoController : Controller
     {
         private readonly AppDbContext _context;
 
-        public TipoArquivoeController(AppDbContext context)
+        public CursoController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: TipoArquivoe
+        // GET: Curso
         public async Task<IActionResult> Index()
         {
-            return View(await _context.TipoArquivo.ToListAsync());
+            return View(await _context.Curso.ToListAsync());
         }
 
-        // GET: TipoArquivoe/Details/5
+        // GET: Curso/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +28,41 @@ namespace BancoQuestoes.Controllers
                 return NotFound();
             }
 
-            var tipoArquivo = await _context.TipoArquivo
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (tipoArquivo == null)
+            var curso = await _context.Curso
+                .FirstOrDefaultAsync(m => m.CursoId == id);
+
+            if (curso == null)
             {
                 return NotFound();
             }
 
-            return View(tipoArquivo);
+            return View(curso);
         }
 
-        // GET: TipoArquivoe/Create
+        // GET: Curso/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: TipoArquivoe/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Curso/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome")] TipoArquivo tipoArquivo)
+        public async Task<IActionResult> Create([Bind("CursoId,Nome")] Curso curso)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tipoArquivo);
+                _context.Add(curso);
+
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(tipoArquivo);
+
+            return View(curso);
         }
 
-        // GET: TipoArquivoe/Edit/5
+        // GET: Curso/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +70,22 @@ namespace BancoQuestoes.Controllers
                 return NotFound();
             }
 
-            var tipoArquivo = await _context.TipoArquivo.FindAsync(id);
-            if (tipoArquivo == null)
+            var curso = await _context.Curso.FindAsync(id);
+
+            if (curso == null)
             {
                 return NotFound();
             }
-            return View(tipoArquivo);
+
+            return View(curso);
         }
 
-        // POST: TipoArquivoe/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Curso/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome")] TipoArquivo tipoArquivo)
+        public async Task<IActionResult> Edit(int id, [Bind("CursoId,Nome")] Curso curso)
         {
-            if (id != tipoArquivo.Id)
+            if (id != curso.CursoId)
             {
                 return NotFound();
             }
@@ -97,12 +94,13 @@ namespace BancoQuestoes.Controllers
             {
                 try
                 {
-                    _context.Update(tipoArquivo);
+                    _context.Update(curso);
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TipoArquivoExists(tipoArquivo.Id))
+                    if (!CursoExists(curso.CursoId))
                     {
                         return NotFound();
                     }
@@ -111,12 +109,14 @@ namespace BancoQuestoes.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(tipoArquivo);
+
+            return View(curso);
         }
 
-        // GET: TipoArquivoe/Delete/5
+        // GET: Curso/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +124,37 @@ namespace BancoQuestoes.Controllers
                 return NotFound();
             }
 
-            var tipoArquivo = await _context.TipoArquivo
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (tipoArquivo == null)
+            var curso = await _context.Curso
+                .FirstOrDefaultAsync(m => m.CursoId == id);
+
+            if (curso == null)
             {
                 return NotFound();
             }
 
-            return View(tipoArquivo);
+            return View(curso);
         }
 
-        // POST: TipoArquivoe/Delete/5
+        // POST: Curso/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tipoArquivo = await _context.TipoArquivo.FindAsync(id);
-            if (tipoArquivo != null)
+            var curso = await _context.Curso.FindAsync(id);
+
+            if (curso != null)
             {
-                _context.TipoArquivo.Remove(tipoArquivo);
+                _context.Curso.Remove(curso);
             }
 
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TipoArquivoExists(int id)
+        private bool CursoExists(int id)
         {
-            return _context.TipoArquivo.Any(e => e.Id == id);
+            return _context.Curso.Any(e => e.CursoId == id);
         }
     }
 }

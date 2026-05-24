@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BancoQuestoes.Models.TipoArquivo>
+@model IEnumerable<BancoQuestoes.Models.TipoArquivo>
 
 @{
     ViewData["Title"] = "Index";
@@ -22,12 +22,12 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Nome)
+                @Html.DisplayFor(model => item.Nome)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.TipoArquivoId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TipoArquivoId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TipoArquivoId">Delete</a>
             </td>
         </tr>
 }

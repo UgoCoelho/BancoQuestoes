@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BancoQuestoes.Data;
 using BancoQuestoes.Models;
+using BancoQuestoes.Data;
 
 namespace BancoQuestoes.Controllers
 {
@@ -22,7 +18,10 @@ namespace BancoQuestoes.Controllers
         // GET: Usuario
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Usuario.ToListAsync());
+            var usuarios = _context.Usuario
+                .Include(u => u.Curso);
+
+            return View(await usuarios.ToListAsync());
         }
 
         // GET: Usuario/Details/5
@@ -34,7 +33,9 @@ namespace BancoQuestoes.Controllers
             }
 
             var usuario = await _context.Usuario
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(u => u.Curso)
+                .FirstOrDefaultAsync(m => m.UsuarioId == id);
+
             if (usuario == null)
             {
                 return NotFound();
@@ -46,22 +47,27 @@ namespace BancoQuestoes.Controllers
         // GET: Usuario/Create
         public IActionResult Create()
         {
+            ViewData["CursoId"] = new SelectList(_context.Curso, "CursoId", "Nome");
+
             return View();
         }
 
         // POST: Usuario/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Matricula,Nome,Curso")] Usuario usuario)
+        public async Task<IActionResult> Create([Bind("UsuarioId,Matricula,Nome,CursoId")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(usuario);
+
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["CursoId"] = new SelectList(_context.Curso, "CursoId", "Nome", usuario.CursoId);
+
             return View(usuario);
         }
 
@@ -74,21 +80,23 @@ namespace BancoQuestoes.Controllers
             }
 
             var usuario = await _context.Usuario.FindAsync(id);
+
             if (usuario == null)
             {
                 return NotFound();
             }
+
+            ViewData["CursoId"] = new SelectList(_context.Curso, "CursoId", "Nome", usuario.CursoId);
+
             return View(usuario);
         }
 
         // POST: Usuario/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Matricula,Nome,Curso")] Usuario usuario)
+        public async Task<IActionResult> Edit(int id, [Bind("UsuarioId,Matricula,Nome,CursoId")] Usuario usuario)
         {
-            if (id != usuario.Id)
+            if (id != usuario.UsuarioId)
             {
                 return NotFound();
             }
@@ -98,11 +106,12 @@ namespace BancoQuestoes.Controllers
                 try
                 {
                     _context.Update(usuario);
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UsuarioExists(usuario.Id))
+                    if (!UsuarioExists(usuario.UsuarioId))
                     {
                         return NotFound();
                     }
@@ -111,8 +120,12 @@ namespace BancoQuestoes.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["CursoId"] = new SelectList(_context.Curso, "CursoId", "Nome", usuario.CursoId);
+
             return View(usuario);
         }
 
@@ -125,7 +138,9 @@ namespace BancoQuestoes.Controllers
             }
 
             var usuario = await _context.Usuario
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(u => u.Curso)
+                .FirstOrDefaultAsync(m => m.UsuarioId == id);
+
             if (usuario == null)
             {
                 return NotFound();
@@ -140,18 +155,20 @@ namespace BancoQuestoes.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var usuario = await _context.Usuario.FindAsync(id);
+
             if (usuario != null)
             {
                 _context.Usuario.Remove(usuario);
             }
 
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
         private bool UsuarioExists(int id)
         {
-            return _context.Usuario.Any(e => e.Id == id);
+            return _context.Usuario.Any(e => e.UsuarioId == id);
         }
     }
 }

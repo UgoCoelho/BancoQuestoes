@@ -2,7 +2,7 @@
 {
     public class TipoArquivo
     {
-        public int Id { get; set; }
+        public int TipoArquivoId { get; set; }
 
         public string Nome { get; set; }
 
