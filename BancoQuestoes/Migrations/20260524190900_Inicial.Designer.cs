@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BancoQuestoes.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260524171845_EstadoAtual")]
-    partial class EstadoAtual
+    [Migration("20260524190900_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -137,6 +137,9 @@ namespace BancoQuestoes.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Periodo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Role")
                         .HasColumnType("int");
 
                     b.Property<string>("Senha")

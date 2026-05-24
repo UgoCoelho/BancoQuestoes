@@ -226,6 +226,14 @@
             <form asp-action="Index" method="post">
                 @Html.AntiForgeryToken()
 
+                @if (!ViewData.ModelState.IsValid && ViewData.ModelState[""] != null)
+                {
+                    <div class="alert-error">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        Matrícula ou senha incorretos.
+                    </div>
+                }
+
                 <div class="form-group">
                     <label class="form-label" asp-for="Matricula">Matrícula</label>
                     <div class="input-wrap">
@@ -241,7 +249,20 @@
                     </div>
                     <span asp-validation-for="Matricula" class="field-error"></span>
 
+                <div class="form-group">
+                    <label class="form-label" asp-for="Senha">Senha</label>
+                    <div class="input-wrap">
+                        <span class="input-icon"><i class="bi bi-lock"></i></span>
+                        <input asp-for="Senha"
+                                class="form-control @(ViewData.ModelState["Senha"]?.Errors.Count > 0 ? "is-invalid" : "")"
+                                type="password"
+                                placeholder="Sua senha" />
+                    </div>
+                    <span asp-validation-for="Senha" class="field-error"></span>
                 </div>
+                
+                </div>
+
 
                 <button type="submit" class="btn-login">
                     <i class="bi bi-box-arrow-in-right me-1"></i> Entrar

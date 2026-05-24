@@ -16,10 +16,13 @@
 </head>
 
 <body>
+
 @{
     // Lê os dados da sessão em qualquer view
     var nomeUsuario = Context.Session.GetString("UsuarioNome");
     var cursoUsuario = Context.Session.GetString("UsuarioCurso");
+    var role = Context.Session.GetString("UsuarioRole"); // "Admin" ou "Usuario"
+    bool isAdmin = role == "Admin";
 
     // Iniciais do nome para o avatar
     string iniciais = "";
@@ -64,11 +67,20 @@
                     <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Início</a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacidade</a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="Materia" asp-action="Index">Materia</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Usuario" asp-action="Index">Usuario</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="TipoArquivo" asp-action="Index">TipoArquivo</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Curso" asp-action="Index">Curso</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Arquivo" asp-action="Index">Arquivo</a></li>
-
+                    @* Menus visíveis apenas para Admin *@
+                    @if (isAdmin)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                <i class="bi bi-shield-lock me-1"></i> Admin
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Index">Usuários</a></li>
+                                <li><a class="dropdown-item" asp-controller="Curso" asp-action="Index">Cursos</a></li>
+                                <li><a class="dropdown-item" asp-controller="TipoArquivo" asp-action="Index">Tipos de Arquivo</a></li>
+                            </ul>
+                        </li>
+                    }
                 </ul>
 
                 <!-- DIREITA -->
@@ -99,6 +111,10 @@
                                 <div class="nav-avatar">@iniciais</div>
                                 <div class="nav-user-info">
                                     <span class="nav-user-name">@nomeUsuario</span>
+                                    @if (isAdmin)
+                                    {
+                                        <span class="badge bg-warning text-dark ms-1" style="font-size:0.65rem;">ADMIN</span>
+                                    }
                                     <span class="nav-user-role">@cursoUsuario</span>
                                 </div>
                             </a>

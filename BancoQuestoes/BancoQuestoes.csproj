@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\PeriodoController.cs" />
+    <Compile Remove="Migrations\AdicionarRoleESeedAdmin.cs" />
     <Compile Remove="Models\Periodo.cs" />
     <Compile Remove="Views\Login\Index.cshtml.cs" />
   </ItemGroup>

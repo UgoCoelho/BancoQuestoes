@@ -34,11 +34,12 @@ namespace BancoQuestoes.Controllers
 
             var usuario = await _context.Usuario
                 .Include(u => u.Curso)
-                .FirstOrDefaultAsync(u => u.Matricula == model.Matricula);
+                .FirstOrDefaultAsync(u => u.Matricula == model.Matricula
+                                       && u.Senha == model.Senha);
 
             if (usuario == null)
             {
-                ModelState.AddModelError("Matricula", "Matrícula não encontrada.");
+                ModelState.AddModelError("", "Matrícula ou senha incorretos.");
                 return View(model);
             }
 
@@ -47,6 +48,8 @@ namespace BancoQuestoes.Controllers
             HttpContext.Session.SetString("UsuarioNome", usuario.Nome);
             HttpContext.Session.SetString("UsuarioCurso", usuario.Curso?.Nome ?? "");
             HttpContext.Session.SetInt32("UsuarioPeriodo", usuario.Periodo);
+            HttpContext.Session.SetString("UsuarioRole", usuario.Role.ToString()); // "Admin" ou "Usuario"
+
 
             return RedirectToAction("Index", "Home");
         }

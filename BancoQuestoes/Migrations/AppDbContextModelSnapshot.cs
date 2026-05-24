@@ -136,6 +136,9 @@ namespace BancoQuestoes.Migrations
                     b.Property<int>("Periodo")
                         .HasColumnType("int");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
                     b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
