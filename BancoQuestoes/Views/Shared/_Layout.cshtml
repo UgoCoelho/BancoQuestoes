@@ -46,7 +46,7 @@
                 </span>
 
                 <div>
-                    <div class="logo-title">KNOULI</div>
+                    <div class="logo-title">KNOWLI</div>
                     <div class="logo-subtitle">Plataforma Acadêmica</div>
                 </div>
             </a>
@@ -66,7 +66,7 @@
                 <ul class="navbar-nav navbar-nav-left">
                     <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Início</a></li>
                     <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacidade</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Materia" asp-action="Index">Materia</a></li>
+                    <li class="nav_item"><a class="nav-link" asp-controller="Arquivo" asp-action="Index">Arquivos</a></li>
                     @* Menus visíveis apenas para Admin *@
                     @if (isAdmin)
                     {
@@ -78,6 +78,8 @@
                                 <li><a class="dropdown-item" asp-controller="Usuario" asp-action="Index">Usuários</a></li>
                                 <li><a class="dropdown-item" asp-controller="Curso" asp-action="Index">Cursos</a></li>
                                 <li><a class="dropdown-item" asp-controller="TipoArquivo" asp-action="Index">Tipos de Arquivo</a></li>
+                                <li><a class="dropdown-item" asp-controller="Materia" asp-action="Index">Materia</a></li>
+                                <li><a class="dropdown-item" asp-controller="Arquivo" asp-action="Index">Arquivos</a></li>    
                             </ul>
                         </li>
                     }
