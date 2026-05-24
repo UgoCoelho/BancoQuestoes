@@ -130,11 +130,7 @@ namespace BancoQuestoes.Migrations
                 name: "IX_Usuario_CursoId",
                 table: "Usuario",
                 column: "CursoId");
-            // Seed do usuário Admin padrão
-            migrationBuilder.Sql(@"
-                INSERT INTO Usuario (Matricula, Nome, Senha, Periodo, CursoId, Role)
-                VALUES (99999999, 'Administrador', 'Admin@123', 1, 1, 1)
-                ");
+
         }
 
 
