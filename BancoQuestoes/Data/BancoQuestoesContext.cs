@@ -15,5 +15,6 @@ namespace BancoQuestoes.Data
         public DbSet<BancoQuestoes.Models.Usuario> Usuario { get; set; } = default!;
         public DbSet<BancoQuestoes.Models.TipoArquivo> TipoArquivo { get; set; } = default!;
         public DbSet<BancoQuestoes.Models.Curso> Curso { get; set; } = default!;
+        public DbSet<BancoQuestoes.Models.Arquivo> Arquivo { get; set; } = default!;
     }
 }
