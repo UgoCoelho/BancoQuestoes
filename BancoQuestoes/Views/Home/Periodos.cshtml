@@ -1,131 +1,95 @@
 ﻿@{
-    ViewData["Title"] = "Periodos";
+    ViewData["Title"] = "Períodos";
 }
 
+<div class="home-container period-page">
 
-<h1>Selecione o Período</h1>
+    <a asp-controller="Home"
+       asp-action="Index"
+       class="back-btn">
+        <i class="bi bi-arrow-left"></i>
+        Voltar para cursos
+    </a>
 
-<div class="period-grid">
+    <!-- HEADER -->
 
-<div class="period-card">
-    <h2>1º Período</h2>
-    <div class="period-stats">
-        <div class="period-stat-row">
-            <span>Matérias</span>
-            <strong>6</strong>
+    <div class="period-header">
+
+        <div class="period-header-icon">
+            <i class="bi bi-journal-bookmark"></i>
         </div>
-        <div class="period-stat-row">
-            <span>Conteúdos</span>
-            <strong>24</strong>
+
+        <div class="period-header-text">
+            <h1>Sistemas de Informação</h1>
+            <p>Selecione o período para explorar as matérias disponíveis</p>
         </div>
+
     </div>
-    <a href=""><span class="period-acess">Acessar</span></a>
-</div>
 
-<div class="period-card">
-    <h2>2º Período</h2>
-    <div class="period-stats">
-        <div class="period-stat-row">
-            <span>Matérias</span>
-            <strong>4</strong>
-        </div>
-        <div class="period-stat-row">
-            <span>Conteúdos</span>
-            <strong>56</strong>
-        </div>
+    <!-- GRID -->
+
+    <div class="periods-grid">
+
+        @for (int i = 1; i <= 8; i++)
+        {
+            <div class="period-box">
+
+                @if (i <= 4)
+                {
+                    <span class="period-badge-new">
+                        +@(i)
+                    </span>
+                }
+
+                <div class="period-number">
+                    @(i)º
+                </div>
+
+                <h3>@(i)º Período</h3>
+
+                <div class="period-info">
+                    <i class="bi bi-book"></i>
+                    <span>5 matérias</span>
+                </div>
+
+                <div class="period-info">
+                    <i class="bi bi-file-earmark-text"></i>
+                    <span>@(30 + i * 3) materiais</span>
+                </div>
+
+                <a asp-controller="Materia"
+                   asp-action="PorPeriodo"
+                   asp-route-periodo="@i"
+                   class="period-link">
+
+                    Ver matérias
+                    <i class="bi bi-arrow-right"></i>
+
+                </a>
+
+            </div>
+        }
+
     </div>
-    <a href=""><span class="period-acess">Acessar</span></a>
-</div>
 
-<div class="period-card">
-    <h2>3º Período</h2>
-    <div class="period-stats">
-        <div class="period-stat-row">
-            <span>Matérias</span>
-            <strong>6</strong>
+    <!-- FOOTER -->
+
+    <div class="period-footer">
+
+        <div class="period-footer-icon">
+            <i class="bi bi-calendar-check"></i>
         </div>
-        <div class="period-stat-row">
-            <span>Conteúdos</span>
-            <strong>45</strong>
+
+        <div>
+            <strong>Organização por Período</strong>
+
+            <p>
+                Cada período contém as matérias específicas daquele semestre.
+                Clique em um período para visualizar disciplinas,
+                materiais e conteúdos disponíveis.
+            </p>
         </div>
+
     </div>
-    <a href=""><span class="period-acess">Acessar</span></a>
-</div>
 
-<div class="period-card">
-    <h2>4º Período</h2>
-    <div class="period-stats">
-        <div class="period-stat-row">
-            <span>Matérias</span>
-            <strong>4</strong>
-        </div>
-        <div class="period-stat-row">
-            <span>Conteúdos</span>
-            <strong>36</strong>
-        </div>
-    </div>
-    <a href=""><span class="period-acess">Acessar</span></a>
 </div>
-
-<div class="period-card">
-    <h2>5º Período</h2>
-    <div class="period-stats">
-        <div class="period-stat-row">
-            <span>Matérias</span>
-            <strong>6</strong>
-        </div>
-        <div class="period-stat-row">
-            <span>Conteúdos</span>
-            <strong>20</strong>
-        </div>
-    </div>
-    <a href=""><span class="period-acess">Acessar</span></a>
-</div>
-
-<div class="period-card">
-    <h2>6º Período</h2>
-    <div class="period-stats">
-        <div class="period-stat-row">
-            <span>Matérias</span>
-            <strong>5</strong>
-        </div>
-        <div class="period-stat-row">
-            <span>Conteúdos</span>
-            <strong>42</strong>
-        </div>
-    </div>
-    <a href=""><span class="period-acess">Acessar</span></a>
-</div>
-
-<div class="period-card">
-    <h2>7º Período</h2>
-    <div class="period-stats">
-        <div class="period-stat-row">
-            <span>Matérias</span>
-            <strong>7</strong>
-        </div>
-        <div class="period-stat-row">
-            <span>Conteúdos</span>
-            <strong>39</strong>
-        </div>
-    </div>
-    <a href=""><span class="period-acess">Acessar</span></a>
-</div>
-
-<div class="period-card">
-    <h2>8º Período</h2>
-    <div class="period-stats">
-        <div class="period-stat-row">
-            <span>Matérias</span>
-            <strong>8</strong>
-        </div>
-        <div class="period-stat-row">
-            <span>Conteúdos</span>
-            <strong>28</strong>
-        </div>
-    </div>
-    <a href=""><span class="period-acess">Acessar</span></a>
-</div>
-</div>
-
-
