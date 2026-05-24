@@ -16,7 +16,22 @@
 </head>
 
 <body>
+@{
+    // Lê os dados da sessão em qualquer view
+    var nomeUsuario = Context.Session.GetString("UsuarioNome");
+    var cursoUsuario = Context.Session.GetString("UsuarioCurso");
 
+    // Iniciais do nome para o avatar
+    string iniciais = "";
+    if (!string.IsNullOrEmpty(nomeUsuario))
+    {
+        var partes = nomeUsuario.Split(' ');
+        iniciais = partes.Length >= 2
+            ? $"{partes[0][0]}{partes[^1][0]}"
+            : nomeUsuario[..Math.Min(2, nomeUsuario.Length)];
+        iniciais = iniciais.ToUpper();
+    }
+}
 <header>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm custom-navbar mb-3">
         <div class="container-fluid">
@@ -71,16 +86,40 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link nav-user" href="#">
-                            <div class="nav-avatar">LL</div>
-
-                            <div class="nav-user-info">
-                                <span class="nav-user-name">Laura Linda</span>
-                                <span class="nav-user-role">Estudante</span>
-                            </div>
-                        </a>
-                    </li>
+                    @if (!string.IsNullOrEmpty(nomeUsuario))
+                    {
+                        <!-- Usuário logado: mostra nome + logout -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link nav-user dropdown-toggle"
+                                href="#"
+                                id="userDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <div class="nav-avatar">@iniciais</div>
+                                <div class="nav-user-info">
+                                    <span class="nav-user-name">@nomeUsuario</span>
+                                    <span class="nav-user-role">@cursoUsuario</span>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li>
+                                    <a class="dropdown-item text-danger" asp-controller="Login" asp-action="Logout">
+                                        <i class="bi bi-box-arrow-right me-1"></i> Sair
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <!-- Não logado: mostra botão de login -->
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Login" asp-action="Index">
+                                <i class="bi bi-box-arrow-in-right me-1"></i> Entrar
+                            </a>
+                        </li>
+                    }
                 </ul>
 
             </div>

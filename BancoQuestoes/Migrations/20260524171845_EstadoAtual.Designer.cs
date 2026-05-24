@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BancoQuestoes.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260524124625_naosei")]
-    partial class naosei
+    [Migration("20260524171845_EstadoAtual")]
+    partial class EstadoAtual
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -133,6 +133,13 @@ namespace BancoQuestoes.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Periodo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
