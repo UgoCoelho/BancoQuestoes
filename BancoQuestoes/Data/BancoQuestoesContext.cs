@@ -15,5 +15,7 @@ namespace BancoQuestoes.Data
         public DbSet<TipoArquivo> TipoArquivo { get; set; }
         public DbSet<Curso> Curso { get; set; }
         public DbSet<Arquivo> Arquivo { get; set; }
+        public DbSet<Periodo> Periodo { get; set; }
+
     }
 }
