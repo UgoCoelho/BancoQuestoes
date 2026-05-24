@@ -1,0 +1,90 @@
+﻿@model IEnumerable<BancoQuestoes.Models.Materia>
+
+@{
+    ViewData["Title"] = "Matérias";
+}
+
+<div class="home-container period-page">
+
+    <!-- BOTÃO VOLTAR -->
+
+    <a asp-controller="Home"
+       asp-action="Periodos"
+       class="back-btn">
+
+        <i class="bi bi-arrow-left"></i>
+        Voltar para períodos
+    </a>
+    <!-- HEADER -->
+    <div class="period-header">
+        <div class="period-header-icon">
+            <i class="bi bi-book"></i>
+        </div>
+        <div class="period-header-text">
+            <h1>Matérias do Período</h1>
+            <p>
+                Explore as disciplinas disponíveis neste semestre
+            </p>
+        </div>
+    </div>
+    <!-- GRID DAS MATÉRIAS -->
+    <div class="periods-grid">
+        @foreach (var item in Model)
+       {
+            <div class="period-box">
+                <div class="period-number">
+                    @(item.Periodo)º
+                </div>
+                <h3>@item.Nome</h3>
+               <div class="period-info">
+                    <i class="bi bi-mortarboard"></i>
+                    <span>
+                        @item.Curso?.Nome
+                    </span>
+                </div>
+                <div class="period-info">
+                    <i class="bi bi-file-earmark-text"></i>
+                    <span>
+                        Materiais disponíveis
+                    </span>
+                </div>
+
+                <a asp-controller="Arquivo"
+                   asp-action="PorMateria"
+                   asp-route-materiaId="@item.MateriaId"
+                   asp-route-periodo="@item.Periodo"
+                   class="period-link">
+
+                    Acessar arquivos
+                    <i class="bi bi-arrow-right"></i>
+
+                </a>
+
+            </div>
+        }
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="period-footer">
+
+        <div class="period-footer-icon">
+            <i class="bi bi-journal-check"></i>
+        </div>
+
+        <div>
+
+            <strong>Disciplinas Organizadas</strong>
+
+            <p>
+                Todas as matérias deste período estão organizadas
+                para facilitar o acesso aos conteúdos, exercícios
+                e materiais de estudo.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
