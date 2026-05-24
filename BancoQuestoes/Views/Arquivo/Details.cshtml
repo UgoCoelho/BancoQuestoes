@@ -1,0 +1,14 @@
+@model BancoQuestoes.Models.Arquivo
+
+<h1>Detalhes</h1>
+
+<p>Título: @Model.Titulo</p>
+<p>Professor: @Model.Professor</p>
+<p>Tag: @Model.Tag</p>
+<p>Descrição: @Model.Descricao</p>
+
+<p>Curso: @Model.Curso?.Nome</p>
+<p>Matéria: @Model.Materia?.Nome</p>
+<p>Tipo: @Model.TipoArquivo?.Nome</p>
+
+<a asp-action="Index">Voltar</a>

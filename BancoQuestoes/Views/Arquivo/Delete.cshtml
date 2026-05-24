@@ -1,0 +1,14 @@
+@model BancoQuestoes.Models.Arquivo
+
+<h1>Excluir</h1>
+
+<p>Tem certeza?</p>
+
+<p>@Model.Titulo</p>
+
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit">Excluir</button>
+</form>
+
+<a asp-action="Index">Cancelar</a>

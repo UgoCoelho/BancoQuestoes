@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BancoQuestoes.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260524001707_first")]
-    partial class first
+    [Migration("20260524124625_naosei")]
+    partial class naosei
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,46 @@ namespace BancoQuestoes.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("BancoQuestoes.Models.Arquivo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CursoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MateriaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Professor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tag")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TipoArquivoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Titulo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CursoId");
+
+                    b.HasIndex("MateriaId");
+
+                    b.HasIndex("TipoArquivoId");
+
+                    b.ToTable("Arquivo");
+                });
 
             modelBuilder.Entity("BancoQuestoes.Models.Curso", b =>
                 {
@@ -101,6 +141,33 @@ namespace BancoQuestoes.Migrations
                     b.HasIndex("CursoId");
 
                     b.ToTable("Usuario");
+                });
+
+            modelBuilder.Entity("BancoQuestoes.Models.Arquivo", b =>
+                {
+                    b.HasOne("BancoQuestoes.Models.Curso", "Curso")
+                        .WithMany()
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BancoQuestoes.Models.Materia", "Materia")
+                        .WithMany()
+                        .HasForeignKey("MateriaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BancoQuestoes.Models.TipoArquivo", "TipoArquivo")
+                        .WithMany()
+                        .HasForeignKey("TipoArquivoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Curso");
+
+                    b.Navigation("Materia");
+
+                    b.Navigation("TipoArquivo");
                 });
 
             modelBuilder.Entity("BancoQuestoes.Models.Usuario", b =>

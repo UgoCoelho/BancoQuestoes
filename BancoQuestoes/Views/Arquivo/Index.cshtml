@@ -1,0 +1,43 @@
+@model IEnumerable<BancoQuestoes.Models.Arquivo>
+
+<h1>Arquivos</h1>
+
+<p>
+    <a asp-action="Create">Novo Arquivo</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Professor</th>
+            <th>Tag</th>
+            <th>Descrição</th>
+            <th>Curso</th>
+            <th>Matéria</th>
+            <th>Tipo</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>@item.Titulo</td>
+            <td>@item.Professor</td>
+            <td>@item.Tag</td>
+            <td>@item.Descricao</td>
+            <td>@item.Curso?.Nome</td>
+            <td>@item.Materia?.Nome</td>
+            <td>@item.TipoArquivo?.Nome</td>
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

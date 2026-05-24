@@ -1,0 +1,43 @@
+@model BancoQuestoes.Models.Arquivo
+
+<h1>Criar Arquivo</h1>
+
+<form asp-action="Create" method="post">
+
+    <div>
+        <label>Título</label>
+        <input asp-for="Titulo" class="form-control" />
+    </div>
+
+    <div>
+        <label>Professor</label>
+        <input asp-for="Professor" class="form-control" />
+    </div>
+
+    <div>
+        <label>Tag</label>
+        <input asp-for="Tag" class="form-control" />
+    </div>
+
+    <div>
+        <label>Descrição</label>
+        <input asp-for="Descricao" class="form-control" />
+    </div>
+
+    <div>
+        <label>Curso</label>
+        <select asp-for="CursoId" asp-items="ViewBag.CursoId" class="form-control"></select>
+    </div>
+
+    <div>
+        <label>Matéria</label>
+        <select asp-for="MateriaId" asp-items="ViewBag.MateriaId" class="form-control"></select>
+    </div>
+
+    <div>
+        <label>Tipo Arquivo</label>
+        <select asp-for="TipoArquivoId" asp-items="ViewBag.TipoArquivoId" class="form-control"></select>
+    </div>
+
+    <button type="submit">Salvar</button>
+</form>
