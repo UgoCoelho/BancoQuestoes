@@ -12,6 +12,14 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// SESSÃO — necessário para o login
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Sessão expira em 30 min
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,10 +42,13 @@ app.UseStaticFiles(new StaticFileOptions
 
 app.UseRouting();
 
+// IMPORTANTE: UseSession deve vir antes de UseAuthorization
+app.UseSession();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Index}/{id?}"); // Inicia na tela de login
 
 app.Run();

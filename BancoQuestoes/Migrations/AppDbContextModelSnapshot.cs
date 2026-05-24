@@ -106,27 +106,6 @@ namespace BancoQuestoes.Migrations
                     b.ToTable("Materias");
                 });
 
-            modelBuilder.Entity("BancoQuestoes.Models.Periodo", b =>
-                {
-                    b.Property<int>("PeriodoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PeriodoId"));
-
-                    b.Property<int>("CursoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Numero")
-                        .HasColumnType("int");
-
-                    b.HasKey("PeriodoId");
-
-                    b.HasIndex("CursoId");
-
-                    b.ToTable("Periodo");
-                });
-
             modelBuilder.Entity("BancoQuestoes.Models.TipoArquivo", b =>
                 {
                     b.Property<int>("TipoArquivoId")
@@ -159,6 +138,16 @@ namespace BancoQuestoes.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Periodo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

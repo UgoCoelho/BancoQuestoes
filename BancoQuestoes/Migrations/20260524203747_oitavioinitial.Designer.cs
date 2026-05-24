@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BancoQuestoes.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260524141506_periodo")]
-    partial class periodo
+    [Migration("20260524203747_oitavioinitial")]
+    partial class oitavioinitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,9 @@ namespace BancoQuestoes.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ArquivoNome")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CursoId")
                         .HasColumnType("int");
@@ -89,6 +92,9 @@ namespace BancoQuestoes.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MateriaId"));
 
+                    b.Property<int>("CursoId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -98,28 +104,9 @@ namespace BancoQuestoes.Migrations
 
                     b.HasKey("MateriaId");
 
-                    b.ToTable("Materias");
-                });
-
-            modelBuilder.Entity("BancoQuestoes.Models.Periodo", b =>
-                {
-                    b.Property<int>("PeriodoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PeriodoId"));
-
-                    b.Property<int>("CursoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Numero")
-                        .HasColumnType("int");
-
-                    b.HasKey("PeriodoId");
-
                     b.HasIndex("CursoId");
 
-                    b.ToTable("Periodo");
+                    b.ToTable("Materias");
                 });
 
             modelBuilder.Entity("BancoQuestoes.Models.TipoArquivo", b =>
@@ -157,6 +144,16 @@ namespace BancoQuestoes.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Periodo")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("UsuarioId");
 
                     b.HasIndex("CursoId");
@@ -175,7 +172,7 @@ namespace BancoQuestoes.Migrations
                     b.HasOne("BancoQuestoes.Models.Materia", "Materia")
                         .WithMany()
                         .HasForeignKey("MateriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("BancoQuestoes.Models.TipoArquivo", "TipoArquivo")
@@ -191,7 +188,7 @@ namespace BancoQuestoes.Migrations
                     b.Navigation("TipoArquivo");
                 });
 
-            modelBuilder.Entity("BancoQuestoes.Models.Periodo", b =>
+            modelBuilder.Entity("BancoQuestoes.Models.Materia", b =>
                 {
                     b.HasOne("BancoQuestoes.Models.Curso", "Curso")
                         .WithMany()
