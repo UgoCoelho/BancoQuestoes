@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BancoQuestoes.Models;
 using BancoQuestoes.Data;
@@ -17,7 +18,21 @@ namespace BancoQuestoes.Controllers
         // GET: Materia
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Materias.ToListAsync());
+            var materias = _context.Materias
+                .Include(m => m.Curso);
+
+            return View(await materias.ToListAsync());
+        }
+
+        // GET: Materia/PorPeriodo
+        public async Task<IActionResult> PorPeriodo(int periodo)
+        {
+            var materias = await _context.Materias
+                .Include(m => m.Curso)
+                .Where(m => m.Periodo == periodo)
+                .ToListAsync();
+
+            return View(materias);
         }
 
         // GET: Materia/Details/5
@@ -29,6 +44,7 @@ namespace BancoQuestoes.Controllers
             }
 
             var materia = await _context.Materias
+                .Include(m => m.Curso)
                 .FirstOrDefaultAsync(m => m.MateriaId == id);
 
             if (materia == null)
@@ -42,13 +58,15 @@ namespace BancoQuestoes.Controllers
         // GET: Materia/Create
         public IActionResult Create()
         {
+            ViewBag.CursoId = new SelectList(_context.Curso, "CursoId", "Nome");
+
             return View();
         }
 
         // POST: Materia/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MateriaId,Periodo,Nome")] Materia materia)
+        public async Task<IActionResult> Create([Bind("MateriaId,Periodo,Nome,CursoId")] Materia materia)
         {
             if (ModelState.IsValid)
             {
@@ -58,6 +76,8 @@ namespace BancoQuestoes.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.CursoId = new SelectList(_context.Curso, "CursoId", "Nome", materia.CursoId);
 
             return View(materia);
         }
@@ -77,13 +97,15 @@ namespace BancoQuestoes.Controllers
                 return NotFound();
             }
 
+            ViewBag.CursoId = new SelectList(_context.Curso, "CursoId", "Nome", materia.CursoId);
+
             return View(materia);
         }
 
         // POST: Materia/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MateriaId,Periodo,Nome")] Materia materia)
+        public async Task<IActionResult> Edit(int id, [Bind("MateriaId,Periodo,Nome,CursoId")] Materia materia)
         {
             if (id != materia.MateriaId)
             {
@@ -113,6 +135,8 @@ namespace BancoQuestoes.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            ViewBag.CursoId = new SelectList(_context.Curso, "CursoId", "Nome", materia.CursoId);
+
             return View(materia);
         }
 
@@ -125,6 +149,7 @@ namespace BancoQuestoes.Controllers
             }
 
             var materia = await _context.Materias
+                .Include(m => m.Curso)
                 .FirstOrDefaultAsync(m => m.MateriaId == id);
 
             if (materia == null)

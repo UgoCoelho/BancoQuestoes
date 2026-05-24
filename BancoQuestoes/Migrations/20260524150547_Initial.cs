@@ -5,7 +5,7 @@
 namespace BancoQuestoes.Migrations
 {
     /// <inheritdoc />
-    public partial class quintoInitial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -24,20 +24,6 @@ namespace BancoQuestoes.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Materias",
-                columns: table => new
-                {
-                    MateriaId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Periodo = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Materias", x => x.MateriaId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TipoArquivo",
                 columns: table => new
                 {
@@ -48,6 +34,27 @@ namespace BancoQuestoes.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TipoArquivo", x => x.TipoArquivoId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Materias",
+                columns: table => new
+                {
+                    MateriaId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Periodo = table.Column<int>(type: "int", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CursoId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Materias", x => x.MateriaId);
+                    table.ForeignKey(
+                        name: "FK_Materias_Curso_CursoId",
+                        column: x => x.CursoId,
+                        principalTable: "Curso",
+                        principalColumn: "CursoId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,13 +84,14 @@ namespace BancoQuestoes.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Professor = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Tag = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Titulo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Professor = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Tag = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CursoId = table.Column<int>(type: "int", nullable: false),
                     MateriaId = table.Column<int>(type: "int", nullable: false),
-                    TipoArquivoId = table.Column<int>(type: "int", nullable: false)
+                    TipoArquivoId = table.Column<int>(type: "int", nullable: false),
+                    ArquivoNome = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -98,8 +106,7 @@ namespace BancoQuestoes.Migrations
                         name: "FK_Arquivo_Materias_MateriaId",
                         column: x => x.MateriaId,
                         principalTable: "Materias",
-                        principalColumn: "MateriaId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "MateriaId");
                     table.ForeignKey(
                         name: "FK_Arquivo_TipoArquivo_TipoArquivoId",
                         column: x => x.TipoArquivoId,
@@ -122,6 +129,11 @@ namespace BancoQuestoes.Migrations
                 name: "IX_Arquivo_TipoArquivoId",
                 table: "Arquivo",
                 column: "TipoArquivoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Materias_CursoId",
+                table: "Materias",
+                column: "CursoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Usuario_CursoId",
