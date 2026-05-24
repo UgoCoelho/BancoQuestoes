@@ -1,146 +1,48 @@
 @model BancoQuestoes.Models.Arquivo
 
-@{
-    ViewData["Title"] = "Compartilhar Material";
-}
+<h1>Criar Arquivo</h1>
 
-<div class="upload-page">
-    <!-- HEADER -->
-    <div class="upload-header">
-        <h1>
-            <i class="bi bi-cloud-upload"></i>
-            Compartilhar Material
-        </h1>
-        <p>
-            Ajude sua comunidade acadêmica compartilhando provas,
-            resumos e materiais de estudo
-        </p>
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+
+    <div>
+        <label>Título</label>
+        <input asp-for="Titulo" class="form-control" />
     </div>
-    <div class="upload-content">
-        <!-- FORM -->
-        <div class="upload-card">
-            <form asp-action="Create" method="post" enctype="multipart/form-data">
-                <!-- UPLOAD -->
-                <div class="upload-box">
 
-                    <label for="arquivo-input" class="upload-label">
-
-                        <i class="bi bi-cloud-arrow-up"></i>
-
-                        <span class="upload-title">
-                            Arraste ou clique para fazer upload
-                        </span>
-
-                        <span class="upload-subtitle">
-                            PDF, DOC, PPT ou imagens • Máximo 10MB
-                        </span>
-
-                        <span id="file-name" class="selected-file">
-                            Nenhum arquivo selecionado
-                        </span>
-
-                    </label>
-
-                    <input asp-for="ArquivoUpload"
-                           type="file"
-                           class="file-input"
-                           id="arquivo-input" />
-
-                </div>
-               <!-- TITULO -->
-                <div class="form-group">
-                    <input asp-for="Titulo"
-                           class="form-control custom-input"
-                           placeholder="Título do Material *" />
-                </div>
-                <!-- DESCRICAO -->
-                <div class="form-group">
-                    <textarea asp-for="Descricao"
-                              class="form-control custom-input textarea"
-                              placeholder="Descrição"></textarea>
-                </div>
-                <!-- LINHA 1 -->
-                <div class="form-row">
-                    <div class="form-group">
-                        <select asp-for="TipoArquivoId"
-                                asp-items="ViewBag.TipoArquivoId"
-                                class="form-control custom-input">
-                            <option value="">Tipo de Conteúdo *</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <select asp-for="MateriaId"
-                                asp-items="ViewBag.MateriaId"
-                                class="form-control custom-input">
-
-                            <option value="">Matéria *</option>
-
-                        </select>
-                    </div>
-                </div>
-               <!-- LINHA 2 -->
-                <div class="form-row">
-                    <div class="form-group">
-                        <select asp-for="CursoId"
-                                asp-items="ViewBag.CursoId"
-                                class="form-control custom-input">
-                            <option value="">Curso *</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input asp-for="Professor"
-                               class="form-control custom-input"
-                               placeholder="Professor *" />
-                    </div>
-                </div>
-                <!-- TAG -->
-                <div class="form-group">
-                    <input asp-for="Tag"
-                           class="form-control custom-input"
-                           placeholder="Tags (separadas por vírgula)" />
-                </div>
-                <!-- BUTTONS -->
-                <div class="button-group">
-                    <a asp-action="Index" class="btn-cancel">
-                        CANCELAR
-                    </a>
-                    <button type="submit" class="btn-submit">
-                        Enviar Material
-                    </button>
-                </div>
-            </form>
-        </div>
-        <!-- SIDE -->
-        <div class="side-content">
-            <!-- DICAS -->
-            <div class="tips-card">
-                <h3>
-                    <i class="bi bi-stars"></i>
-                    Dicas para Upload
-                </h3>
-                <ul>
-                    <li>Use títulos claros e descritivos</li>
-                    <li>Adicione tags relevantes</li>
-                    <li>Verifique a qualidade do arquivo</li>
-                    <li>Respeite direitos autorais</li>
-                </ul>
-            </div>
-        </div>
+    <div>
+        <label>Professor</label>
+        <input asp-for="Professor" class="form-control" />
     </div>
-</div>
 
-<script>
-    const inputFile = document.getElementById("arquivo-input");
-    const fileName = document.getElementById("file-name");
+    <div>
+        <label>Tag</label>
+        <input asp-for="Tag" class="form-control" />
+    </div>
 
-    inputFile.addEventListener("change", function () {
+    <div>
+        <label>Descrição</label>
+        <input asp-for="Descricao" class="form-control" />
+    </div>
 
-        if (inputFile.files.length > 0) {
-            fileName.textContent = inputFile.files[0].name;
-        }
-        else {
-            fileName.textContent = "Nenhum arquivo selecionado";
-        }
+    <div>
+        <label>Curso</label>
+        <select asp-for="CursoId" asp-items="ViewBag.CursoId" class="form-control"></select>
+    </div>
 
-    });
-</script>
+    <div>
+        <label>Matéria</label>
+        <select asp-for="MateriaId" asp-items="ViewBag.MateriaId" class="form-control"></select>
+    </div>
+
+    <div>
+        <label>Tipo Arquivo</label>
+        <select asp-for="TipoArquivoId" asp-items="ViewBag.TipoArquivoId" class="form-control"></select>
+    </div>
+
+    <div class="mb-3">
+        <label>Arquivo</label>
+        <input asp-for="ArquivoUpload" type="file" class="form-control" />
+    </div>
+
+    <button type="submit">Salvar</button>
+</form>
