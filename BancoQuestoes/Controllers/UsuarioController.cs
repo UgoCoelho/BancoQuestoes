@@ -55,7 +55,7 @@ namespace BancoQuestoes.Controllers
         // POST: Usuario/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UsuarioId,Matricula,Nome,CursoId")] Usuario usuario)
+        public async Task<IActionResult> Create([Bind("UsuarioId,Matricula,Nome,CursoId,Senha,Role")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace BancoQuestoes.Controllers
         // POST: Usuario/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UsuarioId,Matricula,Nome,CursoId")] Usuario usuario)
+        public async Task<IActionResult> Edit(int id, [Bind("UsuarioId,Matricula,Nome,CursoId,Senha,Role")] Usuario usuario)
         {
             if (id != usuario.UsuarioId)
             {
