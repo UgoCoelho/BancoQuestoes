@@ -1,53 +1,78 @@
 @model IEnumerable<BancoQuestoes.Models.Usuario>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<div class="crud-page">
 
-<h1>Index</h1>
+    <div class="crud-header">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Matricula)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CursoId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Curso)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(model => item.Matricula)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.CursoId)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Curso)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.UsuarioId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UsuarioId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UsuarioId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <h1 class="crud-title">
+            Usuários
+        </h1>
+
+        <a asp-action="Create"
+           class="crud-btn">
+            + Novo Usuário
+        </a>
+
+    </div>
+
+    <div class="crud-card">
+
+        <table class="crud-table">
+
+            <thead>
+                <tr>
+                    <th>Matrícula</th>
+                    <th>Nome</th>
+                    <th>Curso</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            @foreach(var item in Model)
+            {
+                <tr>
+
+                    <td>@item.Matricula</td>
+
+                    <td>@item.Nome</td>
+
+                    <td>
+                        <span class="crud-badge">
+                            @item.Curso?.Nome
+                        </span>
+                    </td>
+
+                    <td>
+                        <div class="crud-actions">
+
+                            <a asp-action="Edit"
+                               asp-route-id="@item.UsuarioId">
+                               Editar
+                            </a>
+
+                            <a asp-action="Details"
+                               asp-route-id="@item.UsuarioId">
+                                Detalhes
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@item.UsuarioId">
+                               Excluir
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+            }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>

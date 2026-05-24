@@ -1,35 +1,81 @@
 @model IEnumerable<BancoQuestoes.Models.Curso>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cursos";
 }
 
-<h1>Index</h1>
+<div class="crud-page">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(model => item.Nome)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CursoId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CursoId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CursoId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="crud-header">
+
+        <h1 class="crud-title">
+            Cursos
+        </h1>
+
+        <a asp-action="Create"
+           class="crud-btn">
+            + Novo Curso
+        </a>
+
+    </div>
+
+    <div class="crud-card">
+
+        <table class="crud-table">
+
+            <thead>
+                <tr>
+                    <th>Nome do Curso</th>
+                    <th style="width:220px;">
+                        Ações
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+
+                        <span class="crud-badge">
+                            @item.Nome
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div class="crud-actions">
+
+                            <a asp-action="Edit"
+                               asp-route-id="@item.CursoId">
+                                Editar
+                            </a>
+
+                            <a asp-action="Details"
+                               asp-route-id="@item.CursoId">
+                                Detalhes
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@item.CursoId">
+                                Excluir
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+            }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
