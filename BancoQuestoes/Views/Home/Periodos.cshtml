@@ -57,9 +57,14 @@
                     <span>@(30 + i * 3) materiais</span>
                 </div>
 
-                <a href="#" class="period-link">
+                <a asp-controller="Materia"
+                   asp-action="PorPeriodo"
+                   asp-route-periodo="@i"
+                   class="period-link">
+
                     Ver matérias
                     <i class="bi bi-arrow-right"></i>
+
                 </a>
 
             </div>

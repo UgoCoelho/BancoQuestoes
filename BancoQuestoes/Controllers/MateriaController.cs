@@ -24,6 +24,17 @@ namespace BancoQuestoes.Controllers
             return View(await materias.ToListAsync());
         }
 
+        // GET: Materia/PorPeriodo
+        public async Task<IActionResult> PorPeriodo(int periodo)
+        {
+            var materias = await _context.Materias
+                .Include(m => m.Curso)
+                .Where(m => m.Periodo == periodo)
+                .ToListAsync();
+
+            return View(materias);
+        }
+
         // GET: Materia/Details/5
         public async Task<IActionResult> Details(int? id)
         {

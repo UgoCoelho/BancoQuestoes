@@ -25,6 +25,20 @@ public class ArquivoController : Controller
         return View(dados);
     }
 
+    public async Task<IActionResult> PorMateria(int materiaId, int periodo)
+    {
+        var arquivos = await _context.Arquivo
+            .Include(a => a.Curso)
+            .Include(a => a.Materia)
+            .Include(a => a.TipoArquivo)
+            .Where(a => a.MateriaId == materiaId)
+            .ToListAsync();
+
+        ViewBag.Periodo = periodo;
+
+        return View(arquivos);
+    }
+
     // CREATE GET
     public IActionResult Create()
     {
@@ -167,5 +181,32 @@ public class ArquivoController : Controller
         ViewBag.CursoId = new SelectList(_context.Curso, "CursoId", "Nome", arquivo?.CursoId);
         ViewBag.MateriaId = new SelectList(_context.Materias, "MateriaId", "Nome", arquivo?.MateriaId);
         ViewBag.TipoArquivoId = new SelectList(_context.TipoArquivo, "TipoArquivoId", "Nome", arquivo?.TipoArquivoId);
+    }
+
+    // DOWNLOAD
+    public async Task<IActionResult> Download(int id)
+    {
+        var arquivo = await _context.Arquivo.FindAsync(id);
+
+        if (arquivo == null)
+            return NotFound();
+
+        var caminho = Path.Combine(
+            Directory.GetCurrentDirectory(),
+            "Storage",
+            "Arquivos",
+            arquivo.ArquivoNome
+        );
+
+        if (!System.IO.File.Exists(caminho))
+            return NotFound();
+
+        var bytes = await System.IO.File.ReadAllBytesAsync(caminho);
+
+        return File(
+            bytes,
+            "application/octet-stream",
+            arquivo.ArquivoNome
+        );
     }
 }
