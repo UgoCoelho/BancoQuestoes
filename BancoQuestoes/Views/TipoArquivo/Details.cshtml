@@ -1,4 +1,4 @@
-@model BancoQuestoes.Models.Materia
+@model BancoQuestoes.Models.TipoArquivo
 
 @{
     ViewData["Title"] = "Details";
@@ -7,16 +7,9 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Materia</h4>
+    <h4>TipoArquivo</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Periodo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Periodo)
-        </dd>
-    </dl>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Nome)
         </dt>
@@ -26,6 +19,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.MateriaId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.TipoArquivoId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

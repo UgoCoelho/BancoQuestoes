@@ -2,8 +2,8 @@
 {
     public class Materia
     {
-        public int  Id { get; set; }
-        public int periodo { get; set; }
+        public int  MateriaId { get; set; }
+        public int Periodo { get; set; }
         public string Nome { get; set; }
     }
 }
