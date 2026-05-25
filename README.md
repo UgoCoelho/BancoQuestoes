@@ -13,7 +13,7 @@ Gabriel Seixas Pereira Lopes - 5º Período
 Laura Ferreira De Souza - 5º Período
 Ugo Lamana Coelho - 4º Período
 **
-- **Link do Repositório (GitHub/GitLab):https://github.com/UgoCoelho/BancoQuestoes.git**
+- **Link do Repositório (GitHub/GitLab): https://github.com/UgoCoelho/BancoQuestoes.git**
 - **Link do Rascunho/Design (Figma/Lovable/Excalidraw): https://www.figma.com/make/QHkPOe8JKIA0wW2Cp3Dunn/Sem-t%C3%ADtulo?p=f&t=x5o0mqkzry1lBZms-0**
 ---
 ## 💡 2. O Problema e a Proposta de Valor (O Coração da Ideia)
