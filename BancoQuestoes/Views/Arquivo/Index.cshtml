@@ -4,119 +4,125 @@
     ViewData["Title"] = "Arquivos";
 }
 
-<div class="home-container">
+<div class="crud-page">
 
-    <!-- HEADER -->
-    <div class="period-header">
+    <div class="crud-header">
 
-        <div class="period-header-icon">
-            <i class="bi bi-folder2-open"></i>
-        </div>
+        <h1 class="crud-title">
+            Arquivos
+        </h1>
 
-        <div class="period-header-text">
-            <h1>Arquivos Compartilhados</h1>
-            <p>
-                Materiais organizados por período, matéria e professor
-            </p>
-        </div>
-
-    </div>
-
-    <!-- BOTAO -->
-    <div style="margin-bottom: 25px;">
-
-        <a asp-action="Create" class="btn-submit"
-           style="
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                width:220px;
-                height:52px;
-                text-decoration:none;
-           ">
-
-            <i class="bi bi-plus-lg"></i>
-            &nbsp; Novo Arquivo
-
+        <a asp-action="Create"
+           class="crud-btn">
+            + Novo Arquivo
         </a>
 
     </div>
 
-    <!-- GRID -->
-    <div class="periods-grid">
+    <div class="crud-card">
 
-        @foreach (var item in Model.OrderBy(x => x.Curso.Nome)
-                .ThenBy(x => x.Materia.Nome)
-                .ThenBy(x => x.Titulo))
-        {
-            <div class="period-box">
+        <table class="crud-table">
 
-                <div class="period-number">
-                    <i class="bi bi-file-earmark-text"></i>
-                </div>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Professor</th>
+                    <th>Tag</th>
+                    <th>Descrição</th>
+                    <th>Curso</th>
+                    <th>Matéria</th>
+                    <th>Tipo</th>
+                    <th style="width:220px;">
+                        Ações
+                    </th>
+                </tr>
+            </thead>
 
-                <h3>@item.Titulo</h3>
+            <tbody>
 
-                <div class="period-info">
-                    <i class="bi bi-book"></i>
-                    <span>@item.Materia?.Nome</span>
-                </div>
+            @foreach (var item in Model)
+            {
+                <tr>
 
-                <div class="period-info">
-                    <i class="bi bi-mortarboard"></i>
-                    <span>@item.Curso?.Nome</span>
-                </div>
+                    <td>
+                        <strong>
+                            @item.Titulo
+                        </strong>
+                    </td>
 
-                <div class="period-info">
-                    <i class="bi bi-person"></i>
-                    <span>@item.Professor</span>
-                </div>
+                    <td>
+                        @item.Professor
+                    </td>
 
-                <div class="period-info">
-                    <i class="bi bi-tag"></i>
-                    <span>@item.TipoArquivo?.Nome</span>
-                </div>
+                    <td>
 
-                <div class="period-info">
-                    <i class="bi bi-chat-left-text"></i>
-                    <span>@item.Descricao</span>
-                </div>
+                        <span class="crud-badge">
+                            @item.Tag
+                        </span>
 
-                @if (!string.IsNullOrEmpty(item.Tag))
-                {
-                    <div class="period-new">
-                        #@item.Tag
-                    </div>
-                }
+                    </td>
 
-                <div class="period-link">
+                    <td>
 
-                    <div style="display:flex; gap:12px;">
+                        @(item.Descricao?.Length > 40
+                            ? item.Descricao.Substring(0,40) + "..."
+                            : item.Descricao)
 
-                        <a asp-action="Edit"
-                           asp-route-id="@item.Id"
-                           style="text-decoration:none; color:#2563eb;">
-                            Editar
-                        </a>
+                    </td>
 
-                        <a asp-action="Details"
-                           asp-route-id="@item.Id"
-                           style="text-decoration:none; color:#2563eb;">
-                            Detalhes
-                        </a>
+                    <td>
 
-                        <a asp-action="Delete"
-                           asp-route-id="@item.Id"
-                           style="text-decoration:none; color:#ef4444;">
-                            Excluir
-                        </a>
+                        <span class="crud-badge">
+                            @(item.Curso?.Nome ?? "-")
+                        </span>
 
-                    </div>
+                    </td>
 
-                </div>
+                    <td>
 
-            </div>
-        }
+                        <span class="crud-badge">
+                            @(item.Materia?.Nome ?? "-")
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span class="crud-badge">
+                            @(item.TipoArquivo?.Nome ?? "-")
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div class="crud-actions">
+
+                            <a asp-action="Edit"
+                               asp-route-id="@item.Id">
+                                Editar
+                            </a>
+
+                            <a asp-action="Details"
+                               asp-route-id="@item.Id">
+                                Detalhes
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@item.Id">
+                                Excluir
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+            }
+
+            </tbody>
+
+        </table>
 
     </div>
 
