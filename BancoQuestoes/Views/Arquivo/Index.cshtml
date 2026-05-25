@@ -1,43 +1,129 @@
 @model IEnumerable<BancoQuestoes.Models.Arquivo>
 
-<h1>Arquivos</h1>
-
-<p>
-    <a asp-action="Create">Novo Arquivo</a>
-</p>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Título</th>
-            <th>Professor</th>
-            <th>Tag</th>
-            <th>Descrição</th>
-            <th>Curso</th>
-            <th>Matéria</th>
-            <th>Tipo</th>
-            <th></th>
-        </tr>
-    </thead>
-
-    <tbody>
-@foreach (var item in Model)
-{
-        <tr>
-            <td>@item.Titulo</td>
-            <td>@item.Professor</td>
-            <td>@item.Tag</td>
-            <td>@item.Descricao</td>
-            <td>@item.Curso?.Nome</td>
-            <td>@item.Materia?.Nome</td>
-            <td>@item.TipoArquivo?.Nome</td>
-
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
-            </td>
-        </tr>
+@{
+    ViewData["Title"] = "Arquivos";
 }
-    </tbody>
-</table>
+
+<div class="crud-page">
+
+    <div class="crud-header">
+
+        <h1 class="crud-title">
+            Arquivos
+        </h1>
+
+        <a asp-action="Create"
+           class="crud-btn">
+            + Novo Arquivo
+        </a>
+
+    </div>
+
+    <div class="crud-card">
+
+        <table class="crud-table">
+
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Professor</th>
+                    <th>Tag</th>
+                    <th>Descrição</th>
+                    <th>Curso</th>
+                    <th>Matéria</th>
+                    <th>Tipo</th>
+                    <th style="width:220px;">
+                        Ações
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        <strong>
+                            @item.Titulo
+                        </strong>
+                    </td>
+
+                    <td>
+                        @item.Professor
+                    </td>
+
+                    <td>
+
+                        <span class="crud-badge">
+                            @item.Tag
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        @(item.Descricao?.Length > 40
+                            ? item.Descricao.Substring(0,40) + "..."
+                            : item.Descricao)
+
+                    </td>
+
+                    <td>
+
+                        <span class="crud-badge">
+                            @(item.Curso?.Nome ?? "-")
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span class="crud-badge">
+                            @(item.Materia?.Nome ?? "-")
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span class="crud-badge">
+                            @(item.TipoArquivo?.Nome ?? "-")
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <div class="crud-actions">
+
+                            <a asp-action="Edit"
+                               asp-route-id="@item.Id">
+                                Editar
+                            </a>
+
+                            <a asp-action="Details"
+                               asp-route-id="@item.Id">
+                                Detalhes
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@item.Id">
+                                Excluir
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+            }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
