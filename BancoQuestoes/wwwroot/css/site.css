@@ -1307,3 +1307,44 @@ main {
     margin-top: 6px;
     opacity: 0.9;
 }
+
+.card-custom {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    max-width: 800px; /* Ajuste conforme o contêiner do seu site */
+    margin: 2rem auto;
+}
+
+.card-header-custom {
+    background-color: #1a88ff; /* Azul da imagem */
+    color: white;
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
+    padding: 10px 20px;
+    border-bottom: none;
+}
+
+.card-body-custom {
+    padding: 20px;
+    background-color: #ffffff;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.text-variable {
+    color: #1a88ff; /* Cor azul para as variáveis como @curso */
+}
+
+.links-col a {
+    text-decoration: none;
+    color: #1a88ff;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    display: block;
+    text-align: right;
+}
+
+    .links-col a:hover {
+        text-decoration: underline;
+    }
