@@ -18,6 +18,7 @@
             Encontre exercícios, listas e resumos compartilhados pela comunidade
         </p>
     </section>
+ </div>
 
     <!-- stats -->
 
@@ -45,52 +46,126 @@
         </div>
     </section>
 
-    <!-- FILTROS -->
-
-    <section class="filters">
-        <select>
-            <option>Todos os cursos</option>  
-            <!--
-                @* @foreach (var curso in Model)
-                {
-                    <option value="@curso.Id">
-                        @curso.Nome
-                    </option>
-                } *@ -->
-            <option>aqui vai puxar os cursos disponíveis da Model Curso</option>
-        </select>
-        <input type="text"
-               placeholder="Buscar disciplna ou professor" />
-    </section>
-
     <!-- CURSOS -->
 
     <section class="courses-grid">
+
         <!-- SI -->
-        <div class="course-card">
-            <span class="badge">
-                CURSO
-            </span>
-            <h2>Sistemas de Informação</h2>
-            <p>
-                Materiais, listas e resumos do curso
-            </p>
-            <a asp-controller="Home" asp-action="Periodos" class="course-button">
-                Explorar materiais
+        <div class="modern-course-card">
+
+            <div class="course-top">
+                <div class="course-icon blue">
+                    SI
+                </div>
+            </div>
+
+            <h2 class="course-name">Sistemas de Informação</h2>
+
+            <div class="course-stats">
+
+                <div class="mini-stat">
+                    <i class="bi bi-book"></i>
+                    <strong>42</strong>
+                    <span>Matérias</span>
+                </div>
+
+                <div class="mini-stat">
+                    <i class="bi bi-file-earmark-text"></i>
+                    <strong>324</strong>
+                    <span>Materiais</span>
+                </div>
+
+                <div class="mini-stat">
+                    <i class="bi bi-people"></i>
+                    <strong>450</strong>
+                    <span>Alunos</span>
+                </div>
+
+            </div>
+
+            <div class="course-periods">
+                <i class="bi bi-mortarboard"></i>
+                <div>
+                    <strong>8 Períodos Disponíveis</strong>
+                    <p>Do 1º ao 8º período</p>
+                </div>
+            </div>
+
+            <a asp-controller="Home"
+               asp-action="Periodos"
+               class="explore-link">
+                Explorar Períodos
+                <i class="bi bi-arrow-right"></i>
             </a>
+
         </div>
+
         <!-- ES -->
-        <div class="course-card">
-            <span class="badge">
-                CURSO
-            </span>
-            <h2>Engenharia de Software</h2>
-            <p>
-                Materiais, listas e resumos do curso
-            </p>
-            <a href="#" class="course-button">
-                Explorar materiais
+
+        <div class="modern-course-card">
+
+            <div class="course-top">
+                <div class="course-icon purple">
+                    ES
+                </div>
+            </div>
+
+            <h2 class="course-name">Engenharia de Software</h2>
+
+            <div class="course-stats">
+
+                <div class="mini-stat">
+                    <i class="bi bi-book"></i>
+                    <strong>38</strong>
+                    <span>Matérias</span>
+                </div>
+
+                <div class="mini-stat">
+                    <i class="bi bi-file-earmark-text"></i>
+                    <strong>287</strong>
+                    <span>Materiais</span>
+                </div>
+
+                <div class="mini-stat">
+                    <i class="bi bi-people"></i>
+                    <strong>380</strong>
+                    <span>Alunos</span>
+                </div>
+
+            </div>
+
+            <div class="course-periods">
+                <i class="bi bi-mortarboard"></i>
+                <div>
+                    <strong>8 Períodos Disponíveis</strong>
+                    <p>Do 1º ao 8º período</p>
+                </div>
+            </div>
+
+            <a href="#"
+               class="explore-link">
+                Explorar Períodos
+                <i class="bi bi-arrow-right"></i>
             </a>
+
         </div>
+
     </section>
-</div>
+
+    <!-- CARD AZUL -->
+
+    <div class="info-banner">
+
+        <div class="banner-icon">
+            <i class="bi bi-stars"></i>
+        </div>
+
+        <div>
+            <h3>Navegação Organizada</h3>
+            <p>
+                Escolha seu curso, depois navegue pelos períodos e encontre
+                todas as matérias organizadas de forma clara e intuitiva.
+            </p>
+        </div>
+
+    </div>
