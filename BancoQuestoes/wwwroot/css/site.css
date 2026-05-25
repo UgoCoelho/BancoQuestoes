@@ -19,9 +19,8 @@ main {
 .home-container {
     max-width: 1200px;
     width: 100%;
-    margin: auto;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    margin: 0 auto; /* O '0 auto' garante o centro da tela */
+    padding: 40px 20px; /* Adicionado um padding lateral de 20px para telas menores */
 }
 
 .hero-title {
@@ -39,9 +38,10 @@ main {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: 380px 380px 380px;
-    gap: 30px;
-    margin-bottom: 30px;
+    /* Substitua os valores fixos (380px) por 1fr para que o grid se adapte automaticamente */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px; /* O gap da imagem parece um pouco menor, 24px fica ideal */
+    margin-bottom: 40px;
 }
 
 .stats-card {
@@ -101,8 +101,10 @@ main {
 
 .courses-grid {
     display: grid;
-    grid-template-columns: 580px 580px;
-    gap: 30px;
+    /* Substitua a versão com valores fixos para 2 colunas fluidas */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 20px;
 }
 
 .course-card {
@@ -1311,9 +1313,10 @@ main {
 .card-custom {
     border: none;
     border-radius: 12px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-    max-width: 800px; /* Ajuste conforme o contêiner do seu site */
-    margin: 2rem auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    /* Remova o max-width: auto; */
+    width: 100%; /* Ocupa todo o espaço do home-container */
+    margin: 0 0 40px 0; /* Remove a margem auto e apenas empurra o conteúdo de baixo */
 }
 
 .card-header-custom {
@@ -1334,13 +1337,14 @@ main {
 
 .text-variable {
     color: #1a88ff; /* Cor azul para as variáveis como @curso */
+
 }
 
 .links-col a {
     text-decoration: none;
     color: #1a88ff;
-    font-size: 0.95rem;
-    margin-bottom: 8px;
+    font-size: 20px;
+    margin-bottom: 12px;
     display: block;
     text-align: right;
 }
@@ -1348,3 +1352,6 @@ main {
     .links-col a:hover {
         text-decoration: underline;
     }
+.text {
+    font-size: 20px;
+}
