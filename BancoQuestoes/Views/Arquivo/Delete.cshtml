@@ -1,14 +1,43 @@
 @model BancoQuestoes.Models.Arquivo
 
-<h1>Excluir</h1>
+@{
+    ViewData["Title"] = "Excluir Material";
+}
 
-<p>Tem certeza?</p>
-
-<p>@Model.Titulo</p>
-
-<form asp-action="Delete">
-    <input type="hidden" asp-for="Id" />
-    <button type="submit">Excluir</button>
-</form>
-
-<a asp-action="Index">Cancelar</a>
+<div class="home-container">
+    <a asp-action="Index" class="back-btn">
+        <i class="bi bi-arrow-left"></i>
+        Voltar
+    </a>
+    <div class="upload-card delete-card">
+        <div class="delete-header">
+            <div class="period-number delete-icon">
+                <i class="bi bi-trash"></i>
+            </div>
+            <h2 class="delete-title">
+                Excluir Material
+            </h2>
+            <p class="delete-subtitle">
+                Tem certeza que deseja excluir este material?
+            </p>
+        </div>
+        <div class="delete-box">
+            <strong>
+                @Model.Titulo
+            </strong>
+        </div>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <div class="button-group">
+                <a asp-action="Index"
+                   class="btn-cancel">
+                    Cancelar
+                </a>
+                <button type="submit"
+                        class="btn-submit btn-delete">
+                    Excluir
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
